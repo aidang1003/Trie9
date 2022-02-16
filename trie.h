@@ -6,7 +6,9 @@
 
 
 struct TrieNode {
-//define this
+    //define this
+    char word[MAX_WORD_LENGTH];
+	struct TrieNode* children[NUM_CHILDREN];
 };
 
 /*
@@ -18,9 +20,9 @@ struct TrieNode* trieNode_new();
 /*
  * Return a pointer to the word inside of the node.
  * NOT a pointer to a copy of the word. If there is no
- * word then return NULL. 
+ * word then return NULL.
  *
- * This function is required for external testing purposes 
+ * This function is required for external testing purposes
  * and would not be useful for implementing search/insert
  * if you need a non-const pointer to the word
  */
@@ -32,7 +34,7 @@ const char* trieNode_getWord(const struct TrieNode* node);
  * i = 2-9 are T9 letters, and i=10 is #
  * NOT a pointer to a copy of the child.
  *
- * This function is required for external testing purposes 
+ * This function is required for external testing purposes
  * and would not be useful for implementing search/insert
  * if you need a non-const pointer to the child
  */
@@ -43,14 +45,14 @@ const struct TrieNode* trieNode_getChild(const struct TrieNode* node, int i);
  * whose word corresponds to
  * the given integer code.
  * codelength is the number of integers in the code. See trieNode_getChild
- * for meaning of each code from 2 to 10. 
+ * for meaning of each code from 2 to 10.
  */
 struct TrieNode* trieNode_search(struct TrieNode* root, const int* code, int codelength);
 
 /*
  * insert the given word into the trie rooted at root.
  */
-void trieNode_insert(struct TrieNode* root, const char* word); 
+void trieNode_insert(struct TrieNode* root, const char* word);
 
 /*
  * free the heap memory associated with the trie rooted at root
