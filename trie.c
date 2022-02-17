@@ -21,30 +21,34 @@ int charToInt(char input) {
 
 struct TrieNode* trieNode_new(){
         struct TrieNode *node = malloc(1 * sizeof(struct TrieNode));
-        node->word[MAX_WORD_LENGTH] = NULL; // setting to null may not be needed
-        node->children[NUM_CHILDREN] = NULL;
+        node->word[MAX_WORD_LENGTH];
+        node->children[NUM_CHILDREN]; //make array 2-10 of pointers
         return node;
 };
 
-//void trieNode_insert(struct TrieNode* root, const char* word){
-//    printf("trieNode_insert \n");
-//    printf("Entered TrieNode_insert with word >> %s \n", *word);
-//    printf("Entered TrieNode_insert with word size of >> %d \n", sizeof(word));
-//
-////    convert the word to a T9 key sequence represented as an array of integers
-////    add the word to the trie
-//
-//    int T9Arr[sizeof(word)];
-//    struct Trie* curr = root;
-//    for (int i = 0; i < sizeof(word); i++) {
-//        printf("char %d >> \n", i);
-//        printf("char %d >> %c \n", i, word[i]);
-//        printf("in for loop >> %c \n", charToInt(word[i])); // verify this is working
-//        T9Arr[i] = charToInt(word[i]);
-//    }
-//    printf("complete array word >> %c\n", T9Arr); // verify this is working
-//    curr->word = T9Arr;
-//};
+void trieNode_insert(struct TrieNode* root, const char* word){
+//    convert the word to a T9 key sequence represented as an array of integers
+//    add the word to the trie
+//    create array of 2-10
+
+    printf("Entered TrieNode_insert with word >> %s \n", word); // testing
+    printf("Entered TrieNode_insert with size >> %d \n", strlen(word)); // testing
+
+
+    struct Trie* curr = root;
+
+    int T9Arr[sizeof(word)];
+
+    for (int i = 0; i < strlen(word); i++) {
+        T9Arr[i] = charToInt(word[i]);
+        if (curr->children[T9Arr[i] == NULL) {
+            curr->children[T9Arr[i]] = trieNode_new();
+        }
+        curr = curr->children[T9Arr[i]];
+    }
+
+
+};
 
 
 struct TrieNode* trieNode_search(struct TrieNode* root, const int* code, int codelength) {
@@ -55,6 +59,11 @@ void trieNode_free(struct TrieNode* root){
     //return Null;
 };
 
+const char* trieNode_getWord(const struct TrieNode* node);
+
+const struct TrieNode* trieNode_getChild(const struct TrieNode* node, int i);
+
+
 void print_trie(struct TrieNode *h) {
   while (h != NULL) {
     printf("%d \n", h->word);
@@ -62,43 +71,11 @@ void print_trie(struct TrieNode *h) {
   }
 }
 
-//char *returnChar(const char word) {
-//    return word;
-//}
-
-void *returnChar() {
-    static char arr[20] = {'g', 'o', 'l', 'd', 'e', 'n'};
-    char arr2[20] = "GOLDEN";
-
-    for (int i = 0; i < sizeof(arr); i++) {
-        printf("Element %d >> %c \n", i, arr[i]);
-        printf("Element %d >> %c \n", i, arr2[i]);
-    }
-//    return word;
-}
-
-int returnNum(int num) {
-    return num;
-}
 
 
 main() {
-//    printf("%d\n", charToInt('#'));
-//
-//    struct TrieNode *node = trieNode_new();
-//
-//    trieNode_insert(node, 'belong');
-//    printf("Word >> %c\n", node->word);
-
-//    char myChar1 = 's';
-//    char myChar2[40] = "hello world";
-//    printf("my char1 >> %c \n", returnChar(myChar1));
-//    printf("my char2 >> %c \n", returnChar(myChar2));
-
-//    int myInt;
-//    myInt = 5;
-//    returnNum(5);
-//    printf("my num >> %d \n", returnNum(5));
-    returnChar();
+    struct TrieNode *node = trieNode_new();
+    char *arr = "golden";
+    trieNode_insert(node, arr);
 
 }
