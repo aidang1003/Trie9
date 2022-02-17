@@ -8,7 +8,7 @@
 struct TrieNode {
     //define this
     char word[MAX_WORD_LENGTH];
-	struct TrieNode* children[NUM_CHILDREN];
+	struct TrieNode *children[NUM_CHILDREN];
 };
 
 /*
