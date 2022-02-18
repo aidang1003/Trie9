@@ -35,6 +35,11 @@ struct TrieNode* trieNode_new(){
         struct TrieNode *node = malloc(1 * sizeof(struct TrieNode));
         node->word[MAX_WORD_LENGTH];
         node->children[NUM_CHILDREN]; // make array of tries
+
+        int i = 0;
+        while (i < NUM_CHILDREN) {
+            node->children[i] = NULL;
+        }
         return node;
 };
 
@@ -85,9 +90,9 @@ void trieNode_free(struct TrieNode* root){
     //return Null;
 };
 
-const char* trieNode_getWord(const struct TrieNode* node);
+const char* trieNode_getWord(const struct TrieNode* node) { return NULL; };
 
-const struct TrieNode* trieNode_getChild(const struct TrieNode* node, int i);
+const struct TrieNode* trieNode_getChild(const struct TrieNode* node, int i) { return NULL; };
 
 
 void printTrie(struct TrieNode *h) {
