@@ -19,17 +19,19 @@ int charToInt(char input) {
 
 }
 
+int* digToArr(int num, int numLength) {
+    int output[numLength];
+    for (int i = numLength; i > 0; i--) {
+        output[i] = num % 10;
+        num = num / 10;
+    }
+
+}
+
 struct TrieNode* trieNode_new(){
         struct TrieNode *node = malloc(1 * sizeof(struct TrieNode));
         node->word[MAX_WORD_LENGTH];
         node->children[NUM_CHILDREN]; // make array of tries
-
-//        int i = 0;
-//        while (i < NUM_CHILDREN) { // set array to null
-//            node->children[i] = NULL;
-//            i++;
-//        }
-
         return node;
 };
 
@@ -63,7 +65,10 @@ void trieNode_insert(struct TrieNode* root, const char* word){
 
 
 struct TrieNode* trieNode_search(struct TrieNode* root, const int* code, int codelength) {
-    //return Null;
+    printf("in function: \n");
+    for (int i = 0; i < codelength; i++) {
+        printf("digit >> %d \n", code);
+    }
 };
 
 void trieNode_free(struct TrieNode* root){
@@ -78,7 +83,7 @@ const struct TrieNode* trieNode_getChild(const struct TrieNode* node, int i);
 void printTrie(struct TrieNode *h) {
     printf("Word: %s \n", h->word);
     for (int i =0; i < NUM_CHILDREN; i++) {
-        printf(h->children[i]);
+        printf(h->children[i]); // not sure how to print an array of trie structures
     }
 }
 
@@ -86,8 +91,16 @@ void printTrie(struct TrieNode *h) {
 
 main() {
     struct TrieNode *node = trieNode_new();
+//
+//    char *arr = "golden";
+//    trieNode_insert(node, arr);
 
-    char *arr = "golden";
-    trieNode_insert(node, arr);
+    const int* myInt = 12345;
+//    trieNode_search(node, myInt, 5);
+
+    int myNum[5] = digToArr(myInt, 5);
+    for (int i = 0; i < sizeof(myNum)/sizeof(myNum[0]); i++) {
+        printf("digit >> %d \n", myNum[i]);
+    }
 
 }
