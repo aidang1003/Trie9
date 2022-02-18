@@ -19,13 +19,16 @@ int charToInt(char input) {
 
 }
 
-int* digToArr(int num, int numLength) {
-    int output[numLength];
-    for (int i = numLength; i > 0; i--) {
-        output[i] = num % 10;
+int posNum(int num, int pos) {
+    // return the digit at the position
+    // position 0 is the left most digit in the number
+    // position n is the right most digit in the number
+    int output;
+    int len = floor(log10(abs(num))) + 1;
+    for (int i = 0; i < len - pos - 1; i++) {
         num = num / 10;
     }
-
+    return num % 10;
 }
 
 struct TrieNode* trieNode_new(){
@@ -39,9 +42,6 @@ void trieNode_insert(struct TrieNode* root, const char* word){
 //    convert the word to a T9 key sequence represented as an array of integers
 //    add the word to the trie
 
-//    printf("Entered TrieNode_insert with word >> %s \n", word); // testing
-
-
     struct TrieNode* curr = root; // create a pointer to the root trie
     // This used to be called Trie* curr and caused a lot of problems
 
@@ -51,11 +51,13 @@ void trieNode_insert(struct TrieNode* root, const char* word){
             curr->children[T9] = trieNode_new(); // create a new Trie Node
         }
         curr = curr->children[T9]; // set current to child of index T9 number
-        curr = trieNode_new(); // create a new node
+        // curr = trieNode_new(); // create a new node
     }
+
     while (curr->word != NULL) { // handles # case
         curr = curr->children[10]; // sets the current to index of 10
     }
+
     if (curr->word == NULL) { // probable not needed as the while loop takes care of finding the NULL word
         for (int i = 0; i < strlen(word); i++) {
             curr->word[i] = word[i]; // assigns the word to the trie node
@@ -65,10 +67,18 @@ void trieNode_insert(struct TrieNode* root, const char* word){
 
 
 struct TrieNode* trieNode_search(struct TrieNode* root, const int* code, int codelength) {
-    printf("in function: \n");
+    int a;
+    struct TrieNode* curr = root;
     for (int i = 0; i < codelength; i++) {
-        printf("digit >> %d \n", code);
+        a = posNum(code, i);
+        printf("moved to child %d \n", a);
+        if (curr->children[a] == NULL) {
+            printf("entered if stmnt");
+            curr->children[a] = trieNode_new();
+        }
+        curr = curr->children[a];
     }
+    return curr;
 };
 
 void trieNode_free(struct TrieNode* root){
@@ -83,7 +93,7 @@ const struct TrieNode* trieNode_getChild(const struct TrieNode* node, int i);
 void printTrie(struct TrieNode *h) {
     printf("Word: %s \n", h->word);
     for (int i =0; i < NUM_CHILDREN; i++) {
-        printf(h->children[i]); // not sure how to print an array of trie structures
+        printf("Children word %d >> %s", i, h->children[i]->word); // not sure how to print an array of trie structures
     }
 }
 
@@ -91,16 +101,12 @@ void printTrie(struct TrieNode *h) {
 
 main() {
     struct TrieNode *node = trieNode_new();
-//
+    printTrie(node);
 //    char *arr = "golden";
 //    trieNode_insert(node, arr);
 
-    const int* myInt = 12345;
-//    trieNode_search(node, myInt, 5);
+    const int* myInt = 78945;
+    trieNode_search(node, myInt, 5);
 
-    int myNum[5] = digToArr(myInt, 5);
-    for (int i = 0; i < sizeof(myNum)/sizeof(myNum[0]); i++) {
-        printf("digit >> %d \n", myNum[i]);
-    }
 
 }
