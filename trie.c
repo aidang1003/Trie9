@@ -24,11 +24,11 @@ struct TrieNode* trieNode_new(){
         node->word[MAX_WORD_LENGTH];
         node->children[NUM_CHILDREN]; // make array of tries
 
-        int i = 0;
-        while (i < NUM_CHILDREN) { // set array to null
-            node->children[i] = NULL;
-            i++;
-        }
+//        int i = 0;
+//        while (i < NUM_CHILDREN) { // set array to null
+//            node->children[i] = NULL;
+//            i++;
+//        }
 
         return node;
 };
@@ -36,26 +36,30 @@ struct TrieNode* trieNode_new(){
 void trieNode_insert(struct TrieNode* root, const char* word){
 //    convert the word to a T9 key sequence represented as an array of integers
 //    add the word to the trie
-//    create array of 2-10
 
     printf("Entered TrieNode_insert with word >> %s \n", word); // testing
     printf("Entered TrieNode_insert with size >> %d \n", strlen(word)); // testing
 
 
-    struct Trie* curr = root;
-
-    int T9Arr[sizeof(word)];
+    struct TrieNode* curr = root; // create a pointer to the root trie
+    // This used to be called Trie* curr and caused a lot of problems
 
     for (int i = 0; i < strlen(word); i++) {
-//        T9Arr[i] = charToInt(word[i]);
-        int TArr = charToInt(word[i]);
-        if (curr->children[TArr] == NULL) {
-            curr->children[TArr] = trieNode_new();
+        int T9 = charToInt(word[i]); // set integer T9 equal to the char in the word
+        if (curr->children[T9] == NULL) { // if the child at index of the T9 conversion is empty
+            curr->children[T9] = trieNode_new(); // create a new Trie Node
         }
-        curr = curr->children[TArr];
+        curr = curr->children[T9]; // set current to child of index T9 number
+        curr = trieNode_new(); // create a new node
     }
-
-
+    while (curr->word != NULL) { // handles # case
+        curr = curr->children[10]; // sets the current to index of 10
+    }
+    if (curr->word == NULL) { // probable not needed as the while loop takes care of finding the NULL word
+        for (int i = 0; i < strlen(word); i++) {
+            curr->word[i] = word[i]; // assigns the word to the trie node
+        }
+    }
 };
 
 
@@ -77,19 +81,14 @@ void printTrie(struct TrieNode *h) {
     for (int i =0; i < NUM_CHILDREN; i++) {
         printf(h->children[i]);
     }
-//  while (h != NULL) {
-//    printf("%s \n", h->word);
-//    h = h->children;
-//  }
 }
 
 
 
 main() {
     struct TrieNode *node = trieNode_new();
-    printTrie(node);
 
-//    char *arr = "golden";
-//    trieNode_insert(node, arr);
+    char *arr = "golden";
+    trieNode_insert(node, arr);
 
 }
