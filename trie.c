@@ -102,18 +102,35 @@ const char* trieNode_getWord(const struct TrieNode* node) { return NULL; };
 const struct TrieNode* trieNode_getChild(const struct TrieNode* node, int i) { return NULL; };
 
 
-void printTrie(struct TrieNode *h) {
-    printf("Word: %s \n", h->word);
-    for (int i =0; i < NUM_CHILDREN; i++) {
-        printf("Children word %d >> %s", i, h->children[i]->word); // not sure how to print an array of trie structures
+void printTrie(Node * root, int level) {
+  if (root) {
+    if (root->word != NULL) {
+      printTabs(level);
+      Node * temp = root;
+      printf("word = ");
+      while (temp) {
+        printf("%s -> ", temp->word);
+        temp = temp->next;
+      }
+      printf("NULL\n");
     }
+    int i;
+    for (i = 0; i < NUM_CHILDREN; i++) {
+      Node * child = root->children[i];
+      if (child != NULL) {
+        printTabs(level);
+        printf("key=%d, index=%d, level=%d : \n", i + 2, i, level);
+        printTrie(child, level + 1);
+      }
+    }
+  }
 }
 
 
 
 main() {
     struct TrieNode *node = trieNode_new();
-    printTrie(node);
+    printTrie(node, 2);
 //    char *arr = "golden";
 //    trieNode_insert(node, arr);
 
