@@ -87,7 +87,14 @@ struct TrieNode* trieNode_search(struct TrieNode* root, const int* code, int cod
 };
 
 void trieNode_free(struct TrieNode* root){
-    //return Null;
+    // free for the entire struct
+    free(root->word);
+    for (int i = 0; i < NUM_CHILDREN; i++) {
+        trieNode_free(root->children[i]);
+        // how will this loop end?
+    }
+    free(root->children);
+    free(root);
 };
 
 const char* trieNode_getWord(const struct TrieNode* node) { return NULL; };
