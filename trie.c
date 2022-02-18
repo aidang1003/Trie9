@@ -37,8 +37,7 @@ void trieNode_insert(struct TrieNode* root, const char* word){
 //    convert the word to a T9 key sequence represented as an array of integers
 //    add the word to the trie
 
-    printf("Entered TrieNode_insert with word >> %s \n", word); // testing
-    printf("Entered TrieNode_insert with size >> %d \n", strlen(word)); // testing
+//    printf("Entered TrieNode_insert with word >> %s \n", word); // testing
 
 
     struct TrieNode* curr = root; // create a pointer to the root trie
