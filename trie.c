@@ -126,6 +126,13 @@ void printTrie(Node * root, int level) {
   }
 }
 
+void printTabs(int numTabs) {
+  int i;
+  for (i = 0; i < numTabs; i++) {
+    printf("\t");
+  }
+}
+
 
 
 main() {
