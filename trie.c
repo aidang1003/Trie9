@@ -20,16 +20,16 @@ int charToInt(char input) {
 
 }
 
-int posNum(int num, int pos) {
+int posNum(const int * num, int pos) {
     // return the digit at the position
     // position 0 is the left most digit in the number
     // position n is the right most digit in the number
-    int output;
+    int output = num;
     int len = floor(log10(abs(num))) + 1;
     for (int i = 0; i < len - pos - 1; i++) {
-        num = num / 10;
+        output = output / 10;
     }
-    return num % 10;
+    return output % 10;
 }
 
 struct TrieNode* trieNode_new(){
