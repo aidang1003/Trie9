@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <stdio.h>
+#include <math.h>
 
 #include "trie.h"
 
@@ -102,21 +103,21 @@ const char* trieNode_getWord(const struct TrieNode* node) { return NULL; };
 const struct TrieNode* trieNode_getChild(const struct TrieNode* node, int i) { return NULL; };
 
 
-void printTrie(Node * root, int level) {
+void printTrie(struct TrieNode * root, int level) {
   if (root) {
     if (root->word != NULL) {
       printTabs(level);
-      Node * temp = root;
+      struct TrieNode * temp = root;
       printf("word = ");
-      while (temp) {
-        printf("%s -> ", temp->word);
-        temp = temp->next;
-      }
+//      while (temp) {
+//        printf("%s -> ", temp->word);
+//        temp = temp->children[2];
+//      }
       printf("NULL\n");
     }
     int i;
     for (i = 0; i < NUM_CHILDREN; i++) {
-      Node * child = root->children[i];
+      struct TrieNode * child = root->children[i];
       if (child != NULL) {
         printTabs(level);
         printf("key=%d, index=%d, level=%d : \n", i + 2, i, level);
@@ -140,9 +141,9 @@ main() {
     printTrie(node, 2);
 //    char *arr = "golden";
 //    trieNode_insert(node, arr);
-
-    const int* myInt = 78945;
-    trieNode_search(node, myInt, 5);
+//
+//    const int* myInt = 78945;
+//    trieNode_search(node, myInt, 5);
 
 
 }
