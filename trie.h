@@ -8,6 +8,7 @@
 struct TrieNode {
     //define this
     char word[MAX_WORD_LENGTH];
+    struct TrieNode * next; // not in approach 3, but allows print function to run
 	struct TrieNode *children[NUM_CHILDREN];
 };
 

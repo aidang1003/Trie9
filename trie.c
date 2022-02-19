@@ -33,12 +33,15 @@ int posNum(const int * num, int pos) {
 }
 
 struct TrieNode* trieNode_new(){
-        struct TrieNode *node = malloc(1 * sizeof(struct TrieNode));
-        node->word[MAX_WORD_LENGTH];
+        int size = sizeof(struct TrieNode);
+
+        struct TrieNode *node = malloc(size);
+        node->word[MAX_WORD_LENGTH] = NULL;
+        node->next = NULL;
         node->children[NUM_CHILDREN]; // make array of tries
 
-        int i = 0;
-        while (i < NUM_CHILDREN) {
+        for (int i = 2; i < NUM_CHILDREN; i++) {
+            node->children[i] = malloc(size);
             node->children[i] = NULL;
         }
         return node;
@@ -53,21 +56,20 @@ void trieNode_insert(struct TrieNode* root, const char* word){
 
     for (int i = 0; i < strlen(word); i++) {
         int T9 = charToInt(word[i]); // set integer T9 equal to the char in the word
-        if (curr->children[T9] == NULL) { // if the child at index of the T9 conversion is empty
-            curr->children[T9] = trieNode_new(); // create a new Trie Node
+        struct TrieNode * child = curr->children[T9];
+        if (!child) { // if the child at index of the T9 conversion is empty
+            child = trieNode_new;
+            curr->children[T9] = child; // create a new Trie Node
         }
         curr = curr->children[T9]; // set current to child of index T9 number
         // curr = trieNode_new(); // create a new node
     }
 
-    while (curr->word != NULL) { // handles # case
+    while (!curr->word) { // handles # case
         curr = curr->children[10]; // sets the current to index of 10
     }
-
-    if (curr->word == NULL) { // probable not needed as the while loop takes care of finding the NULL word
-        for (int i = 0; i < strlen(word); i++) {
-            curr->word[i] = word[i]; // assigns the word to the trie node
-        }
+    for (int i = 0; i < strlen(word); i++) {
+        curr->word[i] = word[i]; // assigns the word to the trie node
     }
 };
 
@@ -103,16 +105,16 @@ const char* trieNode_getWord(const struct TrieNode* node) { return NULL; };
 const struct TrieNode* trieNode_getChild(const struct TrieNode* node, int i) { return NULL; };
 
 
-void printTrie(struct TrieNode * root, int level) {
+void printTrie(struct TrieNode * root, int level) { // prints the trie for debugging
   if (root) {
     if (root->word != NULL) {
       printTabs(level);
       struct TrieNode * temp = root;
       printf("word = ");
-//      while (temp) {
-//        printf("%s -> ", temp->word);
-//        temp = temp->children[2];
-//      }
+      while (temp) {
+        printf("%s -> ", temp->word);
+        temp = temp->next;
+      }
       printf("NULL\n");
     }
     int i;
@@ -137,13 +139,22 @@ void printTabs(int numTabs) {
 
 
 main() {
+    printf("start\n");
     struct TrieNode *node = trieNode_new();
-    printTrie(node, 2);
-//    char *arr = "golden";
-//    trieNode_insert(node, arr);
-//
-//    const int* myInt = 78945;
-//    trieNode_search(node, myInt, 5);
 
+    printf("printing tree >>\n");
+    printTrie(node, 1);
+
+//    printf("tree printed >>\n");
+//    char myWord = "good";
+//
+//    trieNode_insert(node, myWord);
+//    printTrie(node, 1);
+
+
+//    const int a = 8765;
+//    for (int i = 0; i < 4; i++) {
+//        printf("the %d digit is %d \n", i + 1, posNum(a, i));
+//    }
 
 }
