@@ -7,7 +7,8 @@
 
 struct TrieNode {
     //define this
-    char word[MAX_WORD_LENGTH];
+//    char word[MAX_WORD_LENGTH]; //approach 3 implementation
+    char * word; // approach 4 implementation
     struct TrieNode * next; // not in approach 3, but allows print function to run
 	struct TrieNode *children[NUM_CHILDREN];
 };
