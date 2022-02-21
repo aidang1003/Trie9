@@ -74,73 +74,55 @@ struct TrieNode* trieNode_new(){
 //
 //};
 
-
-int getChildIndex(char letter) {
-  int chMap[26] = {
-    2, 2, 2,
-    3, 3, 3,
-    4, 4, 4,
-    5, 5, 5,
-    6, 6, 6,
-    7, 7, 7, 7,
-    8, 8, 8,
-    9, 9, 9, 9
-  };
-  int i = letter - 'a';
-  // subtract 2 because 0 and 1 are reserved for
-  // space and set of special characters
-  return chMap[i];
-}
-
 void trieNode_insert(struct TrieNode * root, const char * word) {
-    printf("Entered trieNode_insert \n");
-    printf("word >> %s \n", word);
-    printNode(root);
+//    printf("Entered trieNode_insert \n");
+//    printf("word >> %s \n", word);
+//    printNode(root);
     struct TrieNode * current = root;
-    printf("error \n");
+//    printf("error \n");
     int wordIndex = 0;
-    printf("error2 \n");
+//    printf("error2 \n");
 
     // insert a word into the trie
-    printf("word: %s, word index: %d \n", word, wordIndex);
-    printf("length of word >> %d \n", strlen(word));
+//    printf("word: %s, word index: %d \n", word, wordIndex);
+//    printf("length of word >> %d \n", strlen(word));
     struct TrieNode * child;
     while (strlen(word) - wordIndex) { // change this to a for loop
 
         char letter = word[wordIndex];
-        printf("line %d\n", 1);
+//        printf("line %d\n", 1);
 
-        printf("with letter for child index >> %c \n", letter);
-        int childIndex = getChildIndex(letter);
-        printf("with num for child index >> %d \n", childIndex);
+//        printf("with letter for child index >> %c \n", letter);
+        int childIndex = charToInt(letter);
+//        printf("with num for child index >> %d \n", childIndex);
 
         child = current->children[childIndex];
-        printf("line %d \n", 2);
+//        printf("line %d \n", 2);
         // make new node if there's no child at this index
 //        printNode(root);
         if (current->children[childIndex] == NULL) {
-            printf("entered loop \n");
-            printf("child index >> %d \n", childIndex);
+//            printf("entered loop \n");
+//            printf("child index >> %d \n", childIndex);
             child = trieNode_new();
 //            printNode(current);
 //            printNode(child);
-            printf("child printed");
+//            printf("child printed");
             current->children[childIndex] = child;
         }
 
-        printf("line %d\n", 3);
+//        printf("line %d\n", 3);
         current = child;
 
-        printf("line %d\n", 4);
+//        printf("line %d\n", 4);
         wordIndex++;
-
-        printf("line %d\n", 5);
-        printf("in while loop with index = %d and string length of word >> %d\n", wordIndex, strlen(word));
+//
+//        printf("line %d\n", 5);
+//        printf("in while loop with index = %d and string length of word >> %d\n", wordIndex, strlen(word));
     }
     // create a linked list when word(s) with the
     // same sequence already exists
     // -> append a node
-    printf("After while loop\n");
+//    printf("After while loop\n");
     if (current->word) {
         struct TrieNode * temp = current;
         while (temp && temp->next) {
@@ -151,7 +133,6 @@ void trieNode_insert(struct TrieNode * root, const char * word) {
         current = newNode;
     }
     int len = wordIndex + 1;
-    // Note: sizeof(char) is 1 in all machine
     current->word = malloc(len);
     strncpy(current->word, word, len);
 }
@@ -193,9 +174,9 @@ void printTrie(struct TrieNode * root, int level) { // prints the trie for debug
     if (root->word != NULL) {
       printTabs(level);
       struct TrieNode * temp = root;
-      printf("word = ");
+      printf("word =  ");
       while (temp) {
-        printf("%s -> ", temp->word);
+        printf("%s ->  ", temp->word);
         temp = temp->next;
       }
       printf("NULL\n");
@@ -205,13 +186,13 @@ void printTrie(struct TrieNode * root, int level) { // prints the trie for debug
       struct TrieNode * child = root->children[i];
       if (child != NULL) {
         printTabs(level);
-        printf("word >> %s", child->word); // prints the word of the child
+        printf("word >> %s ", child->word); // prints the word of the child
         printf("key=%d, index=%d, level=%d : \n", i + 2, i, level);
         printTrie(child, level + 1);
       }
     }
   }
-  printf("complete \n");
+//  printf("complete \n");
 }
 
 void printNode(struct TrieNode * node) {
@@ -242,27 +223,24 @@ main() {
     printf("start\n");
 
     struct TrieNode *node = trieNode_new();
-    printNode(node);
+//    printNode(node);
 //
 //    printf("printing tree >>\n");
 //    printTrie(node, 1);
 
-    char *myWord = "abcd";
-    printf("Character assigned >>\n");
+    char *myWord = "abe";
+    char *myWord2 = "abab";
+//    printf("Character assigned >>\n");
 
     trieNode_insert(node, myWord);
+    trieNode_insert(node, myWord2);
 //    printNode(node);
-    printf("word inserted >>\n");
+//    printf("word inserted >>\n");
 
     printTrie(node, 1);
 //    printNode(node);
 
 
     printf("Done. \n");
-
-//    const int a = 8765;
-//    for (int i = 0; i < 4; i++) {
-//        printf("the %d digit is %d \n", i + 1, posNum(a, i));
-//    }
 
 }
