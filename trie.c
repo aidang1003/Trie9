@@ -16,8 +16,6 @@ int charToInt(char input) {
     if (input >= 't' && input <= 'v') {return 8;}
     if (input >= 'w' && input <= 'z') {return 9;}
     if (input == '#') {return POUND;}
-
-
 }
 
 int posNum(const int * num, int pos) {
@@ -96,20 +94,25 @@ int getChildIndex(char letter) {
 
 void trieNode_insert(struct TrieNode * root, const char * word) {
     printf("Entered trieNode_insert \n");
+    printf("word >> %s \n", word);
+    printNode(root);
     struct TrieNode * current = root;
+    printf("error \n");
     int wordIndex = 0;
+    printf("error2 \n");
 
     // insert a word into the trie
-
-    while (*(word + wordIndex)) {
-        printf("in while loop \n");
+    printf("word: %s, word index: %d \n", word, wordIndex);
+    printf("length of word >> %d \n", strlen(word));
+    while (strlen(word) - wordIndex) { // change this to a for loop
+        printf("in while loop with index = %d\n", wordIndex);
         char letter = word[wordIndex];
         int childIndex = getChildIndex(letter);
 
         struct TrieNode * child = current->children[childIndex];
         // make new node if there's no child at this index
         if (!child) {
-            child = trieNode_new;
+            child = trieNode_new();
             current->children[childIndex] = child;
         }
         current = child;
@@ -118,6 +121,7 @@ void trieNode_insert(struct TrieNode * root, const char * word) {
     // create a linked list when word(s) with the
     // same sequence already exists
     // -> append a node
+    printf("After while loop");
     if (current->word) {
         struct TrieNode * temp = current;
         while (temp && temp->next) {
@@ -200,7 +204,7 @@ void printNode(struct TrieNode * node) {
         if (curr) {
             printf("\tChild %d with word >> %s \n", i, curr->word);
         } else {
-            printf("\tChild %d with null word \n", i);
+            printf("\tChild %d has not been initialized \n", i);
         }
 
     }
@@ -222,17 +226,17 @@ main() {
     printNode(node);
 
     printf("printing tree >>\n");
-    printTrie(node, 1);
+//    printTrie(node, 1);
 
-    char myWord = "good";
+    char *myWord = "good";
     printf("Character assigned >>\n");
 
     trieNode_insert(node, myWord);
-    printNode(node);
+//    printNode(node);
     printf("word inserted >>\n");
 
-    printTrie(node, 1);
-    printNode(node);
+//    printTrie(node, 1);
+//    printNode(node);
 
 
     printf("Done. \n");
