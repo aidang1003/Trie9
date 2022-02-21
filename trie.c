@@ -7,7 +7,15 @@
 
 #include "trie.h"
 
-int charToInt(char input) {
+/*
+
+Aidan Gorny
+Spring 2022
+Trie data structure for implementing T9 auto complete
+
+*/
+
+int charToInt(char input) { // returns the T9 code associated with the character
     //printf("character value >> %d\n", input);
     if (input >= 'a' && input <= 'c') {return 2;}
     if (input >= 'd' && input <= 'f') {return 3;}
@@ -20,7 +28,7 @@ int charToInt(char input) {
     if (input == '#') {return POUND;}
 }
 
-int posNum(const int * num, int pos) {
+int posNum(const int * num, int pos) { // returns the digit at position pos of an integer
     // return the digit at the position
     // position 0 is the left most digit in the number
     // position n is the right most digit in the number
@@ -32,7 +40,7 @@ int posNum(const int * num, int pos) {
     return output % 10;
 }
 
-struct TrieNode* trieNode_new(){
+struct TrieNode* trieNode_new(){ // initializes a new trie node struct
     int size = sizeof(struct TrieNode);
 
     struct TrieNode *node = malloc(size);
@@ -47,36 +55,8 @@ struct TrieNode* trieNode_new(){
     return node;
 };
 
-//void trieNode_insert(struct TrieNode* root, const char* word){
-////    convert the word to a T9 key sequence represented as an array of integers
-////    add the word to the trie
-//
-//    struct TrieNode* curr = root; // create a pointer to the root trie
-//    // This used to be called Trie* curr and caused a lot of problems (for problem story part of assignment)
-//
-//    struct TrieNode * temp;
-//
-//    for (int i = 0; i < strlen(word); i++) {
-//        int T9 = charToInt(word[i]); // set integer T9 equal to the char in the word
-//        temp = curr->children[T9];
-//        if (!temp) { // if the child at index of the T9 conversion is empty
-//            temp = trieNode_new;
-////            curr->children[T9] = child; // create a new Trie Node
-//        }
-//        curr = curr->children[T9]; // set current to child of index T9 number
-//        // curr = trieNode_new(); // create a new node
-//    }
-//
-//    while (!curr->word) { // handles # case
-//        curr = curr->children[10]; // sets the current to index of 10
-//    }
-//    for (int i = 0; i < strlen(word); i++) {
-//        curr->word[i] = word[i]; // assigns the word to the trie node
-//    }
-//
-//};
 
-void trieNode_insert(struct TrieNode * root, const char * word) {
+void trieNode_insert(struct TrieNode * root, const char * word) { // inserts a word at the appropriate position in the trie struct based on the words T9 code
 //    printf("Entered trieNode_insert \n");
 //    printf("word >> %s \n", word);
 //    printNode(root);
@@ -140,14 +120,14 @@ void trieNode_insert(struct TrieNode * root, const char * word) {
 }
 
 
-struct TrieNode* trieNode_search(struct TrieNode* root, const int* code, int codelength) {
+struct TrieNode* trieNode_search(struct TrieNode* root, const int* code, int codelength) { // find if a word exists for a given T9 code, then returns the node
     int a;
     struct TrieNode* curr = root;
     for (int i = 0; i < codelength; i++) {
         a = posNum(code, i);
-        printf("moved to child %d \n", a);
+//        printf("moved to child %d \n", a);
         if (curr->children[a] == NULL) {
-            printf("entered if stmnt");
+//            printf("entered if stmnt");
             curr->children[a] = trieNode_new();
         }
         curr = curr->children[a];
@@ -155,20 +135,29 @@ struct TrieNode* trieNode_search(struct TrieNode* root, const int* code, int cod
     return curr;
 };
 
-void trieNode_free(struct TrieNode* root){
-    // free for the entire struct
-    free(root->word);
+void trieNode_free(struct TrieNode* root){ // frees the lowest initialized node all the way up to the root
     for (int i = 0; i < NUM_CHILDREN; i++) {
-        trieNode_free(root->children[i]);
-        // how will this loop end?
+        if (root->children[i]) {
+            trieNode_free(root->children[i]);
+        }
     }
+    free(root->word);
     free(root->children);
     free(root);
 };
 
-const char* trieNode_getWord(const struct TrieNode* node) { return NULL; };
+const char* trieNode_getWord(const struct TrieNode* node) { // returns the word of a given node
+    const char *output;
+    output = node->word;
+    return output;
 
-const struct TrieNode* trieNode_getChild(const struct TrieNode* node, int i) { return NULL; };
+};
+
+const struct TrieNode* trieNode_getChild(const struct TrieNode* node, int i) { // returns the child of index i at a given node
+    const struct TrieNode* child;
+    child = node->children[i];
+    return child;
+};
 
 
 void printTrie(struct TrieNode * root, int level) { // prints the trie for debugging
@@ -188,7 +177,7 @@ void printTrie(struct TrieNode * root, int level) { // prints the trie for debug
       struct TrieNode * child = root->children[i];
       if (child != NULL) {
         printTabs(level);
-        printf("word >> %s ", child->word); // prints the word of the child
+        printf("word >> %s \n", child->word); // prints the word of the child
         printf("key=%d, index=%d, level=%d : \n", i + 2, i, level);
         printTrie(child, level + 1);
       }
@@ -197,7 +186,7 @@ void printTrie(struct TrieNode * root, int level) { // prints the trie for debug
 //  printf("complete \n");
 }
 
-void printNode(struct TrieNode * node) {
+void printNode(struct TrieNode * node) { // prints the word in the node and the word of the node's children
     struct TrieNode *curr;
     printf("Node word >> %s \n", node->word);
     printf("With children >> \n");
@@ -212,7 +201,7 @@ void printNode(struct TrieNode * node) {
     }
 }
 
-void printTabs(int numTabs) {
+void printTabs(int numTabs) { // prints tabs numTabs times
   int i;
   for (i = 0; i < numTabs; i++) {
     printf("\t");
@@ -220,8 +209,8 @@ void printTabs(int numTabs) {
 }
 
 
-
-//void main() {
+//
+//void main() { // used for testing, main method in app.c
 //    printf("start\n");
 //
 //    struct TrieNode *node = trieNode_new();
@@ -239,7 +228,18 @@ void printTabs(int numTabs) {
 ////    printNode(node);
 ////    printf("word inserted >>\n");
 //
-//    printTrie(node, 1);
+//    /* Test trieNode_search */
+//    struct TrieNode *output;
+//    int code = 2222;
+//    int codeLength = 4;
+//    output = trieNode_search(node, code, codeLength);
+//
+//////     test trieNode_getWord
+////    printf("manual word >> %s\n", trieNode_getWord(output));
+//
+//    printNode(output);
+//
+////    printTrie(node, 1);
 ////    printNode(node);
 //
 //
