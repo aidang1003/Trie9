@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 #include "trie.h"
+#include "trie.c"
 
 int main(int argc, char *argv[]) {
     int bufferSize = 1000;

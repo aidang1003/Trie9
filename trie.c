@@ -219,28 +219,28 @@ void printTabs(int numTabs) {
 
 
 
-main() {
-    printf("start\n");
-
-    struct TrieNode *node = trieNode_new();
-//    printNode(node);
+//void main() {
+//    printf("start\n");
 //
-//    printf("printing tree >>\n");
+//    struct TrieNode *node = trieNode_new();
+////    printNode(node);
+////
+////    printf("printing tree >>\n");
+////    printTrie(node, 1);
+//
+//    char *myWord = "abe";
+//    char *myWord2 = "abab";
+////    printf("Character assigned >>\n");
+//
+//    trieNode_insert(node, myWord);
+//    trieNode_insert(node, myWord2);
+////    printNode(node);
+////    printf("word inserted >>\n");
+//
 //    printTrie(node, 1);
-
-    char *myWord = "abe";
-    char *myWord2 = "abab";
-//    printf("Character assigned >>\n");
-
-    trieNode_insert(node, myWord);
-    trieNode_insert(node, myWord2);
-//    printNode(node);
-//    printf("word inserted >>\n");
-
-    printTrie(node, 1);
-//    printNode(node);
-
-
-    printf("Done. \n");
-
-}
+////    printNode(node);
+//
+//
+//    printf("Done. \n");
+//
+//}
