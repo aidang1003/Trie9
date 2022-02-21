@@ -23,7 +23,7 @@ int posNum(const int * num, int pos) {
     // position 0 is the left most digit in the number
     // position n is the right most digit in the number
     int output = num;
-    int len = floor(log10(abs(num))) + 1;
+    int len = floor(log10(abs(output))) + 1;
     for (int i = 0; i < len - pos - 1; i++) {
         output = output / 10;
     }
