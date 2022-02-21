@@ -6,6 +6,7 @@
 
 int main(int argc, char *argv[]) {
     int bufferSize = 1000;
+    struct TrieNode *root = trieNode_new();
 
     FILE *fp = fopen(argv[1], "r"); /* "r" = open for reading */
 
@@ -17,8 +18,12 @@ int main(int argc, char *argv[]) {
         /* buff has one line of the file, do with it what you will... */
 
         printf ("string >> %s\n", buff); /* ...such as show it on the screen */
+
+        trieNode_insert(root, buff);
     }
     fclose(fp);  /* close the file */
+
+    printTrie(root);
 
     return 1;
 }
