@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
     }
     fclose(fp);  /* close the file */
 
-    printTrie(root);
+//    printTrie(root);
 
     return 1;
 }
