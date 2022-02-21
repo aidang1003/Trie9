@@ -37,7 +37,7 @@ struct TrieNode* trieNode_new(){
 //    node->word[MAX_WORD_LENGTH] = NULL; //approach 3 implementation
     node->word = NULL;
     node->next = NULL;
-    node->children[NUM_CHILDREN] = malloc(NUM_CHILDREN * size); // make array of tries
+    //node->children[NUM_CHILDREN] = malloc(NUM_CHILDREN * size); // make array of tries
 
     for (int i = 0; i < NUM_CHILDREN; i++) {
         node->children[i] = NULL;
@@ -115,22 +115,19 @@ void trieNode_insert(struct TrieNode * root, const char * word) {
         printf("with num for child index >> %d \n", childIndex);
 
         child = current->children[childIndex];
-        printf("line %d\n", 2);
+        printf("line %d \n", 2);
         // make new node if there's no child at this index
 //        printNode(root);
         if (current->children[childIndex] == NULL) {
             printf("entered loop \n");
+            printf("child index >> %d \n", childIndex);
             child = trieNode_new();
-            printNode(child);
-            prinf("child printed");
+//            printNode(current);
+//            printNode(child);
+            printf("child printed");
             current->children[childIndex] = child;
         }
-//
-//        if (!child) {
-//            printf("created a new child >> \n");
-//            child = trieNode_new();
-//            current->children[childIndex] = child;
-//        }
+
         printf("line %d\n", 3);
         current = child;
 
@@ -143,7 +140,7 @@ void trieNode_insert(struct TrieNode * root, const char * word) {
     // create a linked list when word(s) with the
     // same sequence already exists
     // -> append a node
-    printf("After while loop");
+    printf("After while loop\n");
     if (current->word) {
         struct TrieNode * temp = current;
         while (temp && temp->next) {
@@ -246,8 +243,8 @@ main() {
 
     struct TrieNode *node = trieNode_new();
     printNode(node);
-
-    printf("printing tree >>\n");
+//
+//    printf("printing tree >>\n");
 //    printTrie(node, 1);
 
     char *myWord = "abcd";
@@ -257,7 +254,7 @@ main() {
 //    printNode(node);
     printf("word inserted >>\n");
 
-//    printTrie(node, 1);
+    printTrie(node, 1);
 //    printNode(node);
 
 
