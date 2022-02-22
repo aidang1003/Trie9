@@ -36,9 +36,7 @@ int main(int argc, char *argv[]) {
         fclose(fp);  /* close the file */
 
 
-
         /* open other input file now */
-
         FILE *fq = fopen(argv[2], "r");
 
 //        char buff[BUFSIZ]; /* a buffer to hold what you read in */

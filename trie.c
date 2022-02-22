@@ -26,6 +26,7 @@ int charToInt(char input) { // returns the T9 code associated with the character
     if (input >= 't' && input <= 'v') {return 8;}
     if (input >= 'w' && input <= 'z') {return 9;}
     if (input == '#') {return POUND;}
+    return 1;
 }
 
 int posNum(const int * num, int pos) { // returns the digit at position pos of an integer
