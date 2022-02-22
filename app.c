@@ -48,10 +48,12 @@ int main(int argc, char *argv[]) {
         FILE *fq = fopen(argv[2], "r");
 
         char buffet[BufSize]; /* a buffer to hold what you read in */
+
         while(fgets(buffet, BufSize - 1, fq) != NULL) {
-            char casBuf = (char) buffet;
-            int codeLen = len(casBuf);
-            printf ("input string >> %s\n", casBuf);
+            int codeLen = numLen(buffet);
+
+            printf ("input string length >> %d\n", codeLen);
+            printf ("input string >> %s\n", buffet);
 
 //            struct TrieNode *temp;
 //            temp = trieNode_search(root, casBuf, codeLen);

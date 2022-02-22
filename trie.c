@@ -44,7 +44,7 @@ int posNum(const int * num, int pos) { // returns the digit at position pos of a
 }
 
 
-int len(int num) { // returns length of the number
+int numLen(int num) { // returns length of the number
     int output = floor(log10(abs(num)));
     output++;
     return output;
