@@ -6,6 +6,7 @@
 #include "trie.c"
 
 #define BUFSIZ 1000
+#define BUFSIZ2 1000
 
 /*
 
@@ -31,7 +32,7 @@ int main(int argc, char *argv[]) {
         while(fgets(buffer, BUFSIZ - 1, fp) != NULL)
         {
             printf ("word string >> %s\n", buffer);
-//            trieNode_insert(root, buffer);
+            trieNode_insert(root, buffer);
         }
         fclose(fp);  /* close the file */
 
@@ -39,8 +40,8 @@ int main(int argc, char *argv[]) {
         /* open other input file now */
         FILE *fq = fopen(argv[2], "r");
 
-        char buffet[BUFSIZ]; /* a buffer to hold what you read in */
-        while(fgets(buffet, BUFSIZ - 1, fq) != NULL)
+        char buffet[BUFSIZ2]; /* a buffer to hold what you read in */
+        while(fgets(buffet, BUFSIZ2 - 1, fq) != NULL)
         {
             printf ("input string >> %s\n", buffet);
         }
