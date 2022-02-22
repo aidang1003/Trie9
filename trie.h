@@ -60,3 +60,13 @@ void trieNode_insert(struct TrieNode* root, const char* word);
  * free the heap memory associated with the trie rooted at root
  */
 void trieNode_free(struct TrieNode* root);
+
+void printTabs(int numTabs);
+
+void printNode(struct TrieNode * node);
+
+void printTrie(struct TrieNode * root, int level);
+
+int charToInt(char input);
+
+int posNum(const int * num, int pos);
