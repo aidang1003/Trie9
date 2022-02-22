@@ -140,7 +140,6 @@ void trieNode_free(struct TrieNode* root){ // frees the lowest initialized node 
         }
     }
     free(root->word);
-    free(root->children);
     free(root);
 };
 
