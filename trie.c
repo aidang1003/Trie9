@@ -35,7 +35,8 @@ int posNum(const int * num, int pos) { // returns the digit at position pos of a
     // position n is the right most digit in the number
 //    int output = (int) num; // cast in order to compile
     int output = num;
-    int len = floor(log10(abs(output)) + 1;
+    int len = floor(log10(abs(output)));
+    len++;
     for (int i = 0; i < len - pos - 1; i++) {
         output = output / 10;
     }

@@ -30,8 +30,7 @@ int main(int argc, char *argv[]) {
         char buffer[BufSize]; /* a buffer to hold what you read in */
 
         /* read in one line, up to BufSize-1 in length */
-        while(fgets(buffer, BufSize - 1, fp) != NULL)
-        {
+        while(fgets(buffer, BufSize - 1, fp) != NULL) {
             printf ("word string >> %s\n", buffer);
             trieNode_insert(root, buffer);
         }
@@ -43,8 +42,7 @@ int main(int argc, char *argv[]) {
         FILE *fq = fopen(argv[2], "r");
 
         char buffet[BufSize]; /* a buffer to hold what you read in */
-        while(fgets(buffet, BufSize - 1, fq) != NULL)
-        {
+        while(fgets(buffet, BufSize - 1, fq) != NULL) {
             printf ("input string >> %s\n", buffet);
         }
         fclose(fq);
@@ -52,6 +50,4 @@ int main(int argc, char *argv[]) {
         return 1;
 
     }
-    return 0;
-
 }
