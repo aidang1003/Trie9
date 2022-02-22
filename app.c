@@ -31,12 +31,12 @@ int main(int argc, char *argv[]) {
 
         /* read in one line, up to BufSize-1 in length */
         while(fgets(buffer, BufSize - 1, fp) != NULL) {
-            printf ("word string >> %s\n", buffer);
+//            printf ("word string >> %s\n", buffer);
             trieNode_insert(root, buffer);
         }
         fclose(fp);  /* close the file */
 
-        printTrie(root, 1);
+//        printTrie(root, 1);
 
 
         BufSize = BUFSIZ;
@@ -46,7 +46,9 @@ int main(int argc, char *argv[]) {
         char buffet[BufSize]; /* a buffer to hold what you read in */
         while(fgets(buffet, BufSize - 1, fq) != NULL) {
             printf ("input string >> %s\n", buffet);
-
+            struct TrieNode *temp;
+            temp = trieNode_search(buffet);
+            printNode(temp);
         }
         fclose(fq);
 
