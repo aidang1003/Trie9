@@ -49,11 +49,13 @@ int main(int argc, char *argv[]) {
 
         char buffet[BufSize]; /* a buffer to hold what you read in */
         while(fgets(buffet, BufSize - 1, fq) != NULL) {
-            int codeLen = len(buffet);
-            printf ("input string >> %s\n", buffet);
-            struct TrieNode *temp;
-            temp = trieNode_search(root, buffet, codeLen);
-            printNode(temp);
+            char casBuf = (char) buffet;
+            int codeLen = len(casBuf);
+            printf ("input string >> %s\n", casBuf);
+
+//            struct TrieNode *temp;
+//            temp = trieNode_search(root, casBuf, codeLen);
+//            printNode(temp);
         }
         fclose(fq);
 
