@@ -43,6 +43,14 @@ int posNum(const int * num, int pos) { // returns the digit at position pos of a
     return output % 10;
 }
 
+
+int len(int num) { // returns length of the number
+    int output = floor(log10(abs(num)));
+    output++;
+    return output;
+}
+
+
 struct TrieNode* trieNode_new(){ // initializes a new trie node struct
     int size = sizeof(struct TrieNode);
 

@@ -70,3 +70,5 @@ void printTrie(struct TrieNode * root, int level);
 int charToInt(char input);
 
 int posNum(const int * num, int pos);
+
+int len(int num);

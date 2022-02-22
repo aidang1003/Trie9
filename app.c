@@ -1,6 +1,9 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <stdio.h>
+#include <math.h>
+#include <string.h>
+#include <ctype.h>
 
 #include "trie.h"
 #include "trie.c"
@@ -14,6 +17,7 @@ Spring 2022
 App that takes in a file of dictionary words to build the trie data structure
 
 */
+
 
 int main(int argc, char *argv[]) {
 //    if (argc) {
@@ -45,9 +49,10 @@ int main(int argc, char *argv[]) {
 
         char buffet[BufSize]; /* a buffer to hold what you read in */
         while(fgets(buffet, BufSize - 1, fq) != NULL) {
+            int codeLen = len(buffet);
             printf ("input string >> %s\n", buffet);
             struct TrieNode *temp;
-            temp = trieNode_search(buffet);
+            temp = trieNode_search(root, buffet, codeLen);
             printNode(temp);
         }
         fclose(fq);
