@@ -25,13 +25,13 @@ int main(int argc, char *argv[]) {
 
         struct TrieNode *root = trieNode_new();
         FILE *fp = fopen(argv[1], "r"); /* "r" = open for reading */
-        char buff[BUFSIZ]; /* a buffer to hold what you read in */
+        char buffer[BUFSIZ]; /* a buffer to hold what you read in */
 
         /* read in one line, up to BUFSIZ-1 in length */
-        while(fgets(buff, BUFSIZ - 1, fp) != NULL)
+        while(fgets(buffer, BUFSIZ - 1, fp) != NULL)
         {
-            printf ("word string >> %s\n", buff);
-//            trieNode_insert(root, buff);
+            printf ("word string >> %s\n", buffer);
+//            trieNode_insert(root, buffer);
         }
         fclose(fp);  /* close the file */
 
@@ -39,10 +39,10 @@ int main(int argc, char *argv[]) {
         /* open other input file now */
         FILE *fq = fopen(argv[2], "r");
 
-//        char buff[BUFSIZ]; /* a buffer to hold what you read in */
-        while(fgets(buff, BUFSIZ - 1, fq) != NULL)
+        char buffet[BUFSIZ]; /* a buffer to hold what you read in */
+        while(fgets(buffet, BUFSIZ - 1, fq) != NULL)
         {
-            printf ("input string >> %s\n", buff);
+            printf ("input string >> %s\n", buffet);
         }
         fclose(fq);
 
