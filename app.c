@@ -47,17 +47,19 @@ int main(int argc, char *argv[]) {
         /* open other input file now */
         FILE *fq = fopen(argv[2], "r");
 
-        char buffet[BufSize]; /* a buffer to hold what you read in */
+//        char buffet[BufSize]; /* a buffer to hold what you read in */
+        const int* buffet;
+//        int buffet;
 
         while(fgets(buffet, BufSize - 1, fq) != NULL) {
             if (buffet == 'exit') {break;}
             int codeLen = strlen(buffet) - 1;
 
             printf("input string length >> %d\n", codeLen);
-            printf("print buffet type string >> %s\n", buffet);
-
-            int casBuf = (int) buffet;
-            printf("print casBuf type const int*>> %d\n", casBuf);
+            printf("print buffet type string >> %d\n", buffet);
+//
+//            int casBuf = (int) buffet;
+//            printf("print casBuf type const int* >> %d\n", casBuf);
 
 //            struct TrieNode *temp;
 //            temp = trieNode_search(root, casBuf, codeLen);
