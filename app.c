@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
             int codeLen = strlen(buffet) - 1;
 
             printf("input string length >> %d\n", codeLen);
-            printf("print buffet type string >> %d\n", buffet);
+            printf("print input string >> %s\n", buffet);
 
             /*
             Need to turn char input into a const int * that can also fit the '#' character
