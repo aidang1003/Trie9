@@ -143,6 +143,8 @@ struct TrieNode* trieNode_search(struct TrieNode* root, const int* code, int cod
     return curr;
 };
 
+
+
 void trieNode_free(struct TrieNode* root){ // frees the lowest initialized node all the way up to the root
     for (int i = 0; i < NUM_CHILDREN; i++) {
         if (root->children[i]) {

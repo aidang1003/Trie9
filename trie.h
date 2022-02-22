@@ -71,4 +71,4 @@ int charToInt(char input);
 
 int posNum(const int * num, int pos);
 
-int len(int num);
+int numLen(int num);

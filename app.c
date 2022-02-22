@@ -47,8 +47,8 @@ int main(int argc, char *argv[]) {
         /* open other input file now */
         FILE *fq = fopen(argv[2], "r");
 
-//        char buffet[BufSize]; /* a buffer to hold what you read in */
-        const int* buffet;
+        char buffet[BufSize]; /* a buffer to hold what you read in */
+//        const int* buffet;
 //        int buffet;
 
         while(fgets(buffet, BufSize - 1, fq) != NULL) {
@@ -57,9 +57,12 @@ int main(int argc, char *argv[]) {
 
             printf("input string length >> %d\n", codeLen);
             printf("print buffet type string >> %d\n", buffet);
-//
-//            int casBuf = (int) buffet;
-//            printf("print casBuf type const int* >> %d\n", casBuf);
+
+            /*
+            Need to turn char input into a const int * that can also fit the '#' character
+            this seems impossible with the current architecture of the program
+            I will end here
+            */
 
 //            struct TrieNode *temp;
 //            temp = trieNode_search(root, casBuf, codeLen);
