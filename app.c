@@ -6,7 +6,6 @@
 #include "trie.c"
 
 #define BUFSIZ 1000
-#define BUFSIZ2 1000
 
 /*
 
@@ -25,11 +24,13 @@ int main(int argc, char *argv[]) {
         printf("Number of arguments >> %d", argc);
 
         struct TrieNode *root = trieNode_new();
-        FILE *fp = fopen(argv[1], "r"); /* "r" = open for reading */
-        char buffer[BUFSIZ]; /* a buffer to hold what you read in */
+        int BufSize = BUFSIZ;
 
-        /* read in one line, up to BUFSIZ-1 in length */
-        while(fgets(buffer, BUFSIZ - 1, fp) != NULL)
+        FILE *fp = fopen(argv[1], "r"); /* "r" = open for reading */
+        char buffer[BufSize]; /* a buffer to hold what you read in */
+
+        /* read in one line, up to BufSize-1 in length */
+        while(fgets(buffer, BufSize - 1, fp) != NULL)
         {
             printf ("word string >> %s\n", buffer);
             trieNode_insert(root, buffer);
@@ -37,11 +38,12 @@ int main(int argc, char *argv[]) {
         fclose(fp);  /* close the file */
 
 
+        BufSize = BUFSIZ;
         /* open other input file now */
         FILE *fq = fopen(argv[2], "r");
 
-        char buffet[BUFSIZ2]; /* a buffer to hold what you read in */
-        while(fgets(buffet, BUFSIZ2 - 1, fq) != NULL)
+        char buffet[BufSize]; /* a buffer to hold what you read in */
+        while(fgets(buffet, BufSize - 1, fq) != NULL)
         {
             printf ("input string >> %s\n", buffet);
         }
