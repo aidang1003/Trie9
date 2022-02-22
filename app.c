@@ -18,10 +18,10 @@ App that takes in a file of dictionary words to build the trie data structure
 int main(int argc, char *argv[]) {
     if (argc) {
 //    if (argc != 3) {
+        printf("Number of arguments >> %d", argc);
         printf("incorrect amount of arguments\n");
         return 0;
     } else {
-        printf("Number of arguments >> %d", argc);
 
         struct TrieNode *root = trieNode_new();
         int BufSize = BUFSIZ;
