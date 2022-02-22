@@ -50,10 +50,13 @@ int main(int argc, char *argv[]) {
         char buffet[BufSize]; /* a buffer to hold what you read in */
 
         while(fgets(buffet, BufSize - 1, fq) != NULL) {
-            int codeLen = strlen(buffet);
+            int codeLen = strlen(buffet) - 1;
 
-            printf ("input string length >> %d\n", codeLen);
-            printf ("input string >> %s\n", buffet);
+            printf("input string length >> %d\n", codeLen);
+            printf("print buffet type string >> %s\n", buffet);
+
+            const int* casBuf = (const int*) buffet;
+            printf("print casBuf type const int*>> %d\n", casBuf);
 
 //            struct TrieNode *temp;
 //            temp = trieNode_search(root, casBuf, codeLen);
