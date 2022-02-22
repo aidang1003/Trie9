@@ -56,8 +56,8 @@ int main(int argc, char *argv[]) {
             printf("input string length >> %d\n", codeLen);
             printf("print buffet type string >> %s\n", buffet);
 
-            const int* casBuf = (const int*) buffet;
-            printf("print casBuf type const int*>> %ls\n", casBuf);
+            int casBuf = (int) buffet;
+            printf("print casBuf type const int*>> %d\n", casBuf);
 
 //            struct TrieNode *temp;
 //            temp = trieNode_search(root, casBuf, codeLen);
