@@ -64,10 +64,17 @@ int main(int argc, char *argv[]) {
             I will end here
             */
 
-//            struct TrieNode *temp;
-//            temp = trieNode_search(root, casBuf, codeLen);
-//            printNode(temp);
+//            struct TrieNode *temp; //create a node temp
+//            temp = trieNode_search(root, casBuf, codeLen); // run the search function
+//            printNode(temp); // print the node to see if this was done correctly
+
+//            if (temp->word) {
+//                printf("here is your word >> %s \n", temp->word); // if the word exists, return it to the user
+//            } else {
+//                printf("Not found in the current dictionary\n"); // otherwise the word is not in the dictionary
+//            }
         }
+
         fclose(fq);
 
         return 1;
