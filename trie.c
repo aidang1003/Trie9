@@ -101,22 +101,19 @@ void trieNode_insert(struct TrieNode * root, const char * word) { // inserts a w
 //        printf("line %d\n", 5);
 //        printf("in while loop with index = %d and string length of word >> %d\n", wordIndex, strlen(word));
     }
-    // create a linked list when word(s) with the
-    // same sequence already exists
-    // -> append a node
+
+    // if T9 sequence already exists ->'#'
 //    printf("After while loop\n");
-    if (current->word) {
-        struct TrieNode * temp = current;
-        while (temp && temp->next) {
-            temp = temp->next;
-        }
-        struct TrieNode * newNode = trieNode_new();
-        temp->next = newNode;
-        current = newNode;
+    if (current->word) { // if current has a word
+        while (current && current->children[10]) { // move to the leaf node
+            current = current->children[10];
+        } // breaks when there is no longer a child in the '#' character
+        struct TrieNode * newNode = trieNode_new(); //create a new node
+        current->children[10] = newNode; // set the child equal to the new node
     }
     int len = wordIndex + 1;
     current->word = malloc(len);
-    strncpy(current->word, word, len);
+    strncpy(current->word, word, len); //insert the word into position
 }
 
 
@@ -177,7 +174,7 @@ void printTrie(struct TrieNode * root, int level) { // prints the trie for debug
       struct TrieNode * child = root->children[i];
       if (child != NULL) {
         printTabs(level);
-        printf("word >> %s \n", child->word); // prints the word of the child
+        printf("word >> %s ", child->word); // prints the word of the child
         printf("key=%d, index=%d, level=%d : \n", i + 2, i, level);
         printTrie(child, level + 1);
       }
@@ -209,7 +206,7 @@ void printTabs(int numTabs) { // prints tabs numTabs times
 }
 
 
-//
+
 //void main() { // used for testing, main method in app.c
 //    printf("start\n");
 //
@@ -239,7 +236,7 @@ void printTabs(int numTabs) { // prints tabs numTabs times
 //
 //    printNode(output);
 //
-////    printTrie(node, 1);
+//    printTrie(node, 1);
 ////    printNode(node);
 //
 //
