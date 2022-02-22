@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
         char buffet[BufSize]; /* a buffer to hold what you read in */
 
         while(fgets(buffet, BufSize - 1, fq) != NULL) {
-            int codeLen = numLen(buffet);
+            int codeLen = strlen(buffet);
 
             printf ("input string length >> %d\n", codeLen);
             printf ("input string >> %s\n", buffet);
