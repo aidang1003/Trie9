@@ -36,6 +36,8 @@ int main(int argc, char *argv[]) {
         }
         fclose(fp);  /* close the file */
 
+        printTrie(root, 1);
+
 
         BufSize = BUFSIZ;
         /* open other input file now */
@@ -44,6 +46,7 @@ int main(int argc, char *argv[]) {
         char buffet[BufSize]; /* a buffer to hold what you read in */
         while(fgets(buffet, BufSize - 1, fq) != NULL) {
             printf ("input string >> %s\n", buffet);
+
         }
         fclose(fq);
 
